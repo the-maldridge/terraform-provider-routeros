@@ -52,6 +52,7 @@ const (
 	KeyLoopProtectSendInterval = "loop_protect_send_interval"
 	KeyLoopProtectStatus       = "loop_protect_status"
 	KeyMacAddress              = "mac_address"
+	KeyManaged                 = "managed"
 	KeyMtu                     = "mtu"
 	KeyName                    = "name"
 	KeyPlaceBefore             = "place_before"
@@ -450,6 +451,11 @@ var (
 		Type:        schema.TypeString,
 		Computed:    true,
 		Description: "Current mac address.",
+	}
+	PropManagedRo = &schema.Schema{
+		Type:        schema.TypeBool,
+		Computed:    true,
+		Description: "The `managed` (`Y`) flag reported by RouterOS 7.23+.",
 	}
 	// TODO: Replace in all possible resources with a property without 'ForceNew'.
 	// https://github.com/orgs/terraform-routeros/discussions/192#discussioncomment-5929999

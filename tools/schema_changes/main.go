@@ -141,12 +141,8 @@ func main() {
 	}
 }
 
-var (
-	rr = strings.NewReplacer("/add", "", "/set", "", "/reset", "")
-)
-
 func filterContains(base string, filter []string) bool {
-	base = rr.Replace(base)
+	base = path.Dir(base)
 	for _, v := range filter {
 		if base == v {
 			return true

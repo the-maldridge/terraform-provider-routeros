@@ -16,6 +16,23 @@ func ResourceDhcpServer() *schema.Resource {
 			Optional:    true,
 			Description: "Whether to add dynamic ARP entry. ",
 		},
+		"add_dns_entries": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Computed: true,
+			Description: "Whether to add static DNS entries for the hostnames of the DHCP clients. Available in " +
+				"RouterOS starting from version 7.23.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
+		"add_dns_entries_suffix": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+			Description: "Domain suffix appended to the client hostnames when adding DNS entries. Available in " +
+				"RouterOS starting from version 7.23.",
+			ValidateFunc:     validation.StringLenBetween(1, 64),
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"address_pool": {
 			Type:     schema.TypeString,
 			Optional: true,

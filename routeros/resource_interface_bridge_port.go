@@ -92,6 +92,11 @@ func ResourceInterfaceBridgePort() *schema.Resource {
 			Type:     schema.TypeString,
 			Computed: true,
 		},
+		"actual_path_cost": {
+			Type:        schema.TypeInt,
+			Computed:    true,
+			Description: "The path cost currently in use on the port (configured or automatically calculated).",
+		},
 		"auto_isolate": {
 			Type:     schema.TypeBool,
 			Optional: true,
@@ -250,6 +255,7 @@ func ResourceInterfaceBridgePort() *schema.Resource {
 			Computed:    true,
 			Description: "Shows whether the port is capable of learning MAC addresses.",
 		},
+		KeyManaged: PropManagedRo,
 		"multicast_router": {
 			Type:     schema.TypeString,
 			Optional: true,
@@ -421,6 +427,14 @@ func ResourceInterfaceBridgePort() *schema.Resource {
 			Description: "When enabled, it allows to forward DHCP packets towards DHCP server through this port. " +
 				"Mainly used to limit unauthorized servers to provide malicious information for users. " +
 				"This property only has effect when dhcp-snooping is set to yes.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
+		"trusted_dhcpv6": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Computed: true,
+			Description: "When enabled, it allows to forward DHCPv6 server packets through this port. This property " +
+				"only has effect when dhcpv6-snooping is set to yes on the bridge. Available in RouterOS starting from version 7.23.",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
 		},
 		"trusted_ra": {

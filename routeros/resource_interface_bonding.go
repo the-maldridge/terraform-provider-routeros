@@ -113,6 +113,14 @@ func ResourceInterfaceBonding() *schema.Resource {
 				"since RouterOS v7.3.",
 			ValidateFunc: validation.IntBetween(0, 1023),
 		},
+		"lacp_system_priority": {
+			Type:     schema.TypeInt,
+			Optional: true,
+			Description: "LACP system priority used together with the bonding MAC address to form the LACP system " +
+				"identifier. A lower value means higher priority. The setting is available since RouterOS v7.21.",
+			ValidateFunc:     Validation64k,
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"link_monitoring": {
 			Type:     schema.TypeString,
 			Optional: true,

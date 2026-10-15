@@ -12,6 +12,8 @@ import (
     ".id": "*8",
     "address": "192.168.100.2/24",
     "comment": "comment",
+    "container-mac-address": "02:1B:EF:C6:BB:C4",
+    "dhcp-address": "172.16.35.5/24",
     "disabled": "false",
     "gateway": "192.168.100.1",
     "name": "veth1",
@@ -22,8 +24,8 @@ import (
 // https://help.mikrotik.com/docs/display/ROS/Container
 func ResourceInterfaceVeth() *schema.Resource {
 	resSchema := map[string]*schema.Schema{
-		MetaResourcePath:   PropResourcePath("/interface/veth"),
-		MetaId:             PropId(Id),
+		MetaResourcePath: PropResourcePath("/interface/veth"),
+		MetaId:           PropId(Id),
 
 		"address": {
 			Type:        schema.TypeSet,
@@ -34,13 +36,23 @@ func ResourceInterfaceVeth() *schema.Resource {
 				ValidateFunc: validation.IsCIDR,
 			},
 		},
-		KeyComment:  PropCommentRw,
+		KeyComment: PropCommentRw,
+		"container_mac_address": {
+			Type:        schema.TypeString,
+			Computed:    true,
+			Description: "MAC address of the container side of the veth interface.",
+		},
 		KeyDisabled: PropDisabledRw,
 		"dhcp": {
 			Type:             schema.TypeBool,
 			Optional:         true,
 			Description:      "",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
+		"dhcp_address": {
+			Type:        schema.TypeString,
+			Computed:    true,
+			Description: "IP address (CIDR) acquired by the DHCP client when dhcp is enabled.",
 		},
 		"gateway": {
 			Type:         schema.TypeString,

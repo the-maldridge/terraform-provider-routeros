@@ -46,8 +46,8 @@ func ResourceQueueSimple() *schema.Resource {
 	resSchema := map[string]*schema.Schema{
 		MetaResourcePath: PropResourcePath("/queue/simple"),
 		MetaId:           PropId(Id),
-		MetaSkipFields: PropSkipFields("bytes", "dropped", "packet_rate", "packets", "queued_bytes", "queued_packets",
-			"rate", "total_bytes", "total_dropped", "total_packet_rate", "total_packets", "total_queued_bytes",
+		MetaSkipFields: PropSkipFields("bytes", "dropped", "packet_rate", "packets", "pcq_queues", "queued_bytes",
+			"queued_packets", "rate", "total_bytes", "total_dropped", "total_packet_rate", "total_packets", "total_queued_bytes",
 			"total_queued_packets", "total_rate"),
 
 		"bucket_size": {

@@ -20,6 +20,23 @@ func ResourceIpNeighborDiscoverySettings() *schema.Resource {
 		MetaResourcePath: PropResourcePath("/ip/neighbor/discovery-settings"),
 		MetaId:           PropId(Id),
 
+		"add_dns_entries": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Computed: true,
+			Description: "Whether to add DNS entries for the identities of discovered neighbors. Available in " +
+				"RouterOS starting from version 7.23.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
+		"add_dns_entries_suffix": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+			Description: "Domain suffix appended to the neighbor identities when adding DNS entries. Available in " +
+				"RouterOS starting from version 7.23.",
+			ValidateFunc:     validation.StringLenBetween(1, 64),
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"discover_interface_list": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -55,6 +72,14 @@ func ResourceIpNeighborDiscoverySettings() *schema.Resource {
 			Optional: true,
 			Description: "Whether to send Maximum Frame Size TLV in LLDP, which indicates the maximum frame size capability" +
 				" of the interface in bytes (`l2mtu + 18`). Only applies to the Ethernet interfaces.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
+		"lldp_med": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+			Description: "LLDP-MED (Media Endpoint Discovery) TLV advertisement setting. Available in RouterOS " +
+				"starting from version 7.23.",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
 		},
 		"lldp_med_net_policy_vlan": {
