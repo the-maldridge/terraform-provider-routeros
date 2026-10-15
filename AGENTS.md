@@ -11,7 +11,7 @@ Terraform provider for MikroTik RouterOS (`terraform-routeros/routeros`), built 
 | Build | `go build ./...` |
 | Unit tests (no router needed) | `go test ./routeros` (acceptance tests are skipped without `TF_ACC`) |
 | Single test | `go test -run TestName ./routeros` |
-| Acceptance tests | `TF_ACC=1 ROS_HOSTURL=https://<ip> ROS_USERNAME=admin ROS_PASSWORD= ROS_INSECURE=true ROS_VERSION=7.22 go test -timeout 30m -v ./routeros` |
+| Acceptance tests | `TF_ACC=1 ROS_HOSTURL=https://<ip> ROS_USERNAME=admin ROS_PASSWORD= ROS_INSECURE=true ROS_VERSION=7.23 go test -timeout 30m -v ./routeros` |
 | Regenerate docs | `make docs` (runs `go generate ./...` then strips `__meta__` lines with **GNU sed**) |
 | Format examples | `make tfformat` (`terraform fmt -recursive examples/`) |
 | Scaffold resource | `go run tools/boilerplate/main.go routeros_<name>` (flags: `-ds`, `-system`, `-table file.csv`) |
@@ -19,7 +19,7 @@ Terraform provider for MikroTik RouterOS (`terraform-routeros/routeros`), built 
 
 - `make test` uses a 30s timeout; that only works for unit tests.
 - CI (`.github/workflows/module_testing.yml`) runs acceptance tests against the
-  `vaerhme/routeros:v<ver>` docker image for 7.12, 7.15, 7.16 and 7.22, after
+  `vaerhme/routeros:v<ver>` docker image for 7.12, 7.15, 7.16, 7.22 and 7.23, after
   running `.github/scripts/setup_routeros.go` to prepare the router.
 - `go generate ./...` does two things: `tfplugindocs` (from `main.go`) and
   `tools/drift/main.go` (from `routeros/provider.go`), which rewrites

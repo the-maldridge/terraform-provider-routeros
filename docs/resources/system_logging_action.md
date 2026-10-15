@@ -15,10 +15,12 @@
 
 - `bsd_syslog` (Boolean, Deprecated) Whether to use bsd-syslog as defined in RFC 3164.
 - `cef_event_delimiter` (String) Option helps remote syslog to distinguish between individual events within sent batch
+- `check_certificate` (Boolean) Whether to verify the server certificate when sending logs over TLS. Available in RouterOS starting from version 7.23.
 - `disk_file_count` (Number) Specifies number of files used to store log messages, applicable only if `action=disk`.
 - `disk_file_name` (String) Name of the file used to store log messages, applicable only if `action=disk`.
 - `disk_lines_per_file` (Number) Specifies maximum size of file in lines, applicable only if `action=disk`.
 - `disk_stop_on_full` (Boolean) Whether to stop to save log messages to disk after the specified disk-lines-per-file and disk-file-count number is reached, applicable only if `action=disk`.
+- `email_cc` (String) Email address to which a copy of the logs is sent, applicable only if `action=email`. Available in RouterOS starting from version 7.23.
 - `email_start_tls` (Boolean) Whether to use tls when sending email, applicable only if `action=email`.
 - `email_to` (String) Email address where logs are sent, applicable only if `action=email`.
 - `memory_lines` (Number) Number of records in local memory buffer, applicable only if `action=memory`.

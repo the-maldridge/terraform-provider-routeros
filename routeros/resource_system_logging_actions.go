@@ -44,6 +44,14 @@ func ResourceSystemLoggingAction() *schema.Resource {
 			Description:      "Option helps remote syslog to distinguish between individual events within sent batch",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
 		},
+		"check_certificate": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Computed: true,
+			Description: "Whether to verify the server certificate when sending logs over TLS. Available in RouterOS " +
+				"starting from version 7.23.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		KeyDefault: PropDefaultRo,
 		"disk_file_count": {
 			Type:             schema.TypeInt,
@@ -68,6 +76,13 @@ func ResourceSystemLoggingAction() *schema.Resource {
 			Optional: true,
 			Description: "Whether to stop to save log messages to disk after the specified disk-lines-per-file " +
 				"and disk-file-count number is reached, applicable only if `action=disk`.",
+		},
+		"email_cc": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Description: "Email address to which a copy of the logs is sent, applicable only if `action=email`. " +
+				"Available in RouterOS starting from version 7.23.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
 		},
 		"email_start_tls": {
 			Type:        schema.TypeBool,

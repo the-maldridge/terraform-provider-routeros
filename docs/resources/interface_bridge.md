@@ -29,7 +29,7 @@ resource "routeros_interface_bridge" "mlag_bridge" {
 
 ### Optional
 
-- `add_dhcp_option82` (Boolean) Whether to add DHCP Option-82 information (Agent Remote ID and Agent Circuit ID) to DHCP packets. Can be used together with Option-82 capable DHCP server to assign IP addresses and implement policies. This property only has effect when dhcp-snooping is set to yes.
+- `add_dhcp_option82` (Boolean, Deprecated) Whether to add DHCP Option-82 information (Agent Remote ID and Agent Circuit ID) to DHCP packets. Can be used together with Option-82 capable DHCP server to assign IP addresses and implement policies. This property only has effect when dhcp-snooping is set to yes. The parameter was removed in RouterOS v7.23, use `dhcp_agent_circuit_id` and `dhcp_agent_remote_id` instead.
 - `admin_mac` (String) Static MAC address of the bridge. This property only has effect when auto-mac is set to no.
 - `ageing_time` (String) How long a host's information will be kept in the bridge database.
 - `arp` (String) Address Resolution Protocol mode:
@@ -41,7 +41,12 @@ resource "routeros_interface_bridge" "mlag_bridge" {
 - `arp_timeout` (String) ARP timeout is time how long ARP record is kept in ARP table after no packets are received from IP. Value auto equals to the value of arp-timeout in IP/Settings, default is 30s. Can use postfix `ms`, `s`, `m`, `h`, `d` for milliseconds, seconds, minutes, hours or days. If no postfix is set then seconds (s) is used.
 - `auto_mac` (Boolean) Automatically select one MAC address of bridge ports as a bridge MAC address, bridge MAC will be chosen from the first added bridge port. After a device reboot, the bridge MAC can change depending on the port-number.
 - `comment` (String)
+- `dhcp_agent_circuit_id` (String) DHCP Option-82 Agent Circuit ID added to DHCP packets. This property only has effect when dhcp-snooping is set to yes. Available in RouterOS starting from version 7.23.
+- `dhcp_agent_remote_id` (String) DHCP Option-82 Agent Remote ID added to DHCP packets. This property only has effect when dhcp-snooping is set to yes. Available in RouterOS starting from version 7.23.
 - `dhcp_snooping` (Boolean)
+- `dhcpv6_agent_circuit_id` (String) DHCPv6 relay agent Interface-ID (circuit ID) added to DHCPv6 packets. This property only has effect when dhcpv6-snooping is set to yes. Available in RouterOS starting from version 7.23.
+- `dhcpv6_agent_remote_id` (String) DHCPv6 relay agent Remote-ID added to DHCPv6 packets. This property only has effect when dhcpv6-snooping is set to yes. Available in RouterOS starting from version 7.23.
+- `dhcpv6_snooping` (Boolean) Enables DHCPv6 snooping on the bridge. Available in RouterOS starting from version 7.23.
 - `disabled` (Boolean)
 - `ether_type` (String) This property only has effect when vlan-filtering is set to yes.
 - `fast_forward` (Boolean)
@@ -87,6 +92,7 @@ resource "routeros_interface_bridge" "mlag_bridge" {
 - `id` (String) The ID of this resource.
 - `l2mtu` (Number) Layer2 Maximum transmission unit. [See](https://wiki.mikrotik.com/wiki/Maximum_Transmission_Unit_on_RouterBoards).
 - `mac_address` (String) Current mac address.
+- `managed` (Boolean) The `managed` (`Y`) flag reported by RouterOS 7.23+.
 - `running` (Boolean)
 
 ## Import

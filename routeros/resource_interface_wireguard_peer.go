@@ -28,6 +28,18 @@ func ResourceInterfaceWireguardPeer() *schema.Resource {
 				"wg interface is set on that device.",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
 		},
+		"client_allowed_address": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Computed: true,
+			Description: "IP (v4 or v6) addresses with CIDR masks written to the AllowedIPs field of the client " +
+				"configuration, when a peer is imported on a client device (for example, by a QR code). Available " +
+				"in RouterOS starting from version 7.21.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"client_dns": {
 			Type:             schema.TypeString,
 			Optional:         true,

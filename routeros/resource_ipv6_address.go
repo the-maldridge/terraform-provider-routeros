@@ -130,6 +130,14 @@ func ResourceIPv6Address() *schema.Resource {
 				"of the address from address property.",
 			AtLeastOneOf: []string{"address", "from_pool"},
 		},
+		"from_pool_policy": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Computed: true,
+			Description: "Policy used when taking a prefix from the `from_pool` pool. Available in RouterOS starting " +
+				"from version 7.23.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"global": { // RO
 			Type:        schema.TypeBool,
 			Computed:    true,

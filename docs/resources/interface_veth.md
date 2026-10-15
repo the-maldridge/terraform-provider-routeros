@@ -30,6 +30,8 @@ resource "routeros_interface_veth" "test" {
 
 ### Read-Only
 
+- `container_mac_address` (String) MAC address of the container side of the veth interface.
+- `dhcp_address` (String) IP address (CIDR) acquired by the DHCP client when dhcp is enabled.
 - `id` (String) The ID of this resource.
 - `running` (Boolean)
 

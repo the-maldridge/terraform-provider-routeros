@@ -30,6 +30,8 @@ resource "routeros_routing_igmp_proxy_interface" "test" {
 
 - `id` (String) The ID of this resource.
 - `inactive` (Boolean)
+- `querier` (Boolean) Whether the router is the IGMP querier on this interface.
+- `source_ip_address` (String) Source IP address used for IGMP packets sent on this interface.
 
 ## Import
 Import is supported using the following syntax:

@@ -40,5 +40,6 @@ Read-Only:
 - `running` (Boolean)
 - `slave` (Boolean)
 - `type` (String)
+- `vrf` (String)
 
 

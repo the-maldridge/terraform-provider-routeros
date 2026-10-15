@@ -11,7 +11,13 @@ import (
     "disabled": "false",
     "inactive": "true",
     "interface": "lo",
+    "querier": "true",
+    "rx-bytes": "0",
+    "rx-packets": "0",
+    "source-ip-address": "127.0.2.1",
     "threshold": "1",
+    "tx-bytes": "0",
+    "tx-packets": "0",
     "upstream": "false"
   }
 */
@@ -21,6 +27,7 @@ func ResourceRoutingIgmpProxyInterface() *schema.Resource {
 	resSchema := map[string]*schema.Schema{
 		MetaResourcePath: PropResourcePath("/routing/igmp-proxy/interface"),
 		MetaId:           PropId(Id),
+		MetaSkipFields:   PropSkipFields("rx_bytes", "rx_packets", "tx_bytes", "tx_packets"),
 
 		"alternative_subnets": {
 			Type:     schema.TypeSet,
@@ -37,6 +44,16 @@ func ResourceRoutingIgmpProxyInterface() *schema.Resource {
 		KeyDisabled:  PropDisabledRw,
 		KeyInactive:  PropInactiveRo,
 		KeyInterface: PropInterfaceRw,
+		"querier": {
+			Type:        schema.TypeBool,
+			Computed:    true,
+			Description: "Whether the router is the IGMP querier on this interface.",
+		},
+		"source_ip_address": {
+			Type:        schema.TypeString,
+			Computed:    true,
+			Description: "Source IP address used for IGMP packets sent on this interface.",
+		},
 		"threshold": {
 			Type:             schema.TypeInt,
 			Optional:         true,

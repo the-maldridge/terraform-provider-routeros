@@ -321,6 +321,7 @@ func Provider() *schema.Provider {
 			"routeros_routing_ospf_instance":           ResourceRoutingOspfInstance(),
 			"routeros_routing_ospf_area":               ResourceRoutingOspfArea(),
 			"routeros_routing_ospf_area_range":         ResourceRoutingOspfAreaRange(),
+			"routeros_routing_ospf_interface":          ResourceRoutingOspfInterface(),
 			"routeros_routing_ospf_interface_template": ResourceRoutingOspfInterfaceTemplate(),
 
 			// VPN
