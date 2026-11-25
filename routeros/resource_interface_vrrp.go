@@ -180,6 +180,13 @@ func ResourceInterfaceVrrp() *schema.Resource {
 			Optional:    true,
 			Description: "Synchronize connection tracking entries from Master to Backup device.",
 		},
+		"v3_checksum_as_v2": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Description: "Controls if the pseudoheader checksum is included for VRRPv3 IPv4 packets, as it is done " +
+				"by VRRPv2. Available in RouterOS starting from version 7.24.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"v3_protocol": {
 			Type:             schema.TypeString,
 			Optional:         true,

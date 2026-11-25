@@ -75,6 +75,7 @@ resource "routeros_interface_bridge" "mlag_bridge" {
 - `protocol_mode` (String) Select Spanning tree protocol (STP) or Rapid spanning tree protocol (RSTP) to ensure a loop-free topology for any bridged LAN.
 - `pvid` (Number) Port VLAN ID (pvid) specifies which VLAN the untagged ingress traffic is assigned to. It applies e.g. to frames sent from bridge IP and destined to a bridge port. This property only has effect when vlan-filtering is set to yes.
 - `querier_interval` (String) Used to change the interval how often a bridge checks if it is the active multicast querier. This property only has effect when igmp-snooping and multicast-querier is set to yes.
+- `querier_uses_bridge_address` (Boolean) Whether to use the bridge interface source IP address as the source address of the generated queries. This property only has effect when igmp-snooping and multicast-querier is set to yes. Available in RouterOS starting from version 7.24.
 - `query_interval` (String) Used to change the interval how often IGMP general membership queries are sent out. This property only has effect when igmp-snooping and multicast-querier is set to yes.
 - `query_response_interval` (String) Interval in which a IGMP capable device must reply to a IGMP query with a IGMP membership report. This property only has effect when igmp-snooping and multicast-querier is set to yes.
 - `ra_guard` (Boolean) Whether to enable IPv6 Router Advertisement guard on the bridge. Available in RouterOS starting from version 7.22.

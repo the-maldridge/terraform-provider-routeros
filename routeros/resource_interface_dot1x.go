@@ -132,10 +132,19 @@ func ResourceInterfaceDot1xServer() *schema.Resource {
 			ValidateFunc: validation.StringInSlice([]string{"XX-XX-XX-XX-XX-XX", "XX:XX:XX:XX:XX:XX", "XXXXXXXXXXXX",
 				"xx-xx-xx-xx-xx-xx", "xx:xx:xx:xx:xx:xx", "xxxxxxxxxxxx"}, false),
 		},
+		"reauth_period": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Description: "An option that enables server port re-authentication. Available in RouterOS starting " +
+				"from version 7.24, where it replaced `reauth_timeout`.",
+			ValidateFunc:     ValidationTime,
+			DiffSuppressFunc: TimeEqual,
+		},
 		"reauth_timeout": {
 			Type:             schema.TypeString,
 			Optional:         true,
 			Description:      "An option that enables server port re-authentication.",
+			Deprecated:       DeprecatedInfo("7.24"),
 			DiffSuppressFunc: TimeEqual,
 		},
 		"reject_vlan_id": {

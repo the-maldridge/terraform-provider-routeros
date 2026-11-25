@@ -22,6 +22,7 @@ resource "routeros_wifi_channel" "channel1" {
 
 ### Optional
 
+- `afc` (Boolean) Whether to use AFC (Automated Frequency Coordination) for channel selection. Applies to the 6 GHz band, where AFC is required to determine the usable frequencies. Available in RouterOS starting from version 7.24.
 - `band` (String) Frequency band and wireless standard that will be used by the AP.
 - `comment` (String)
 - `deprioritize_unii_3_4` (Boolean) Whether to assign lower priority to channels with a control frequency of 5720 or 5825-5885 MHz. These channels are unsupported by some client devices, making their automatic selection undesirable. Defaults to `yes` in ETSI regulatory domains, elsewhere to `no`.

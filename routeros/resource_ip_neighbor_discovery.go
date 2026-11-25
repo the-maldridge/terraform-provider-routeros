@@ -50,6 +50,14 @@ func ResourceIpNeighborDiscoverySettings() *schema.Resource {
 				"The setting is available since RouterOS version 7.16.",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
 		},
+		"dying_gasp": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Description: "Whether to send a `TTL=0` packet from LLDP, MNDP and CDP before a graceful reboot, " +
+				"shutdown or upgrade. The neighbor entry is cleared on the receiving side when such a packet " +
+				"arrives. Available in RouterOS starting from version 7.24.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"lldp_dcbx": {
 			Type:     schema.TypeBool,
 			Optional: true,

@@ -38,12 +38,17 @@ resource "routeros_routing_ospf_interface" "vlink" {
 ### Optional
 
 - `address` (String) The IP address of the OSPF interface.
+- `auth` (String) Specifies authentication method for OSPF protocol messages. Available in RouterOS starting from version 7.24.
+- `auth_id` (Number) The key id is used to calculate message digest (used when MD5 or SHA authentication is enabled).
+- `auth_key` (String, Sensitive) The authentication key to be used, should match on all the neighbors of the network segment.
+- `comment` (String)
 - `cost` (Number) Interface cost expressed as link state metric.
 - `dead_interval` (String) Specifies the interval after which a neighbor is declared dead.
 - `disabled` (Boolean)
 - `hello_interval` (String) The interval between HELLO packets that the router sends out this interface.
 - `instance_id` (Number) OSPFv3 instance ID.
 - `interface` (String) The interface on which OSPF runs.
+- `passive` (Boolean) If enabled, then do not send or receive OSPF traffic on this interface. Available in RouterOS starting from version 7.24. <em>The correct value of this attribute may not be displayed in Winbox. Please check the parameters in the console!</em>
 - `priority` (Number) Router's priority. Used to determine the designated router in a broadcast network.
 - `retransmit_interval` (String) Time interval the lost link state advertisement will be resent.
 - `transmit_delay` (String) Link-state transmit delay is the estimated time it takes to transmit a link-state update packet on the interface.

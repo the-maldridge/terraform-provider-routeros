@@ -30,8 +30,9 @@ import (
 // ResourceRoutingOspfInterface https://help.mikrotik.com/docs/display/ROS/OSPF
 func ResourceRoutingOspfInterface() *schema.Resource {
 	resSchema := map[string]*schema.Schema{
-		MetaResourcePath: PropResourcePath("/routing/ospf/interface"),
-		MetaId:           PropId(Id),
+		MetaResourcePath:   PropResourcePath("/routing/ospf/interface"),
+		MetaId:             PropId(Id),
+		MetaSetUnsetFields: PropSetUnsetFields("passive"),
 
 		"address": {
 			Type:             schema.TypeString,
@@ -45,6 +46,27 @@ func ResourceRoutingOspfInterface() *schema.Resource {
 			Required:    true,
 			Description: "The OSPF area to which the interface is associated.",
 		},
+		"auth": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Description: "Specifies authentication method for OSPF protocol messages. Available in RouterOS " +
+				"starting from version 7.24.",
+			ValidateFunc: validation.StringInSlice([]string{"simple", "md5", "sha1", "sha256", "sha384", "sha512"}, true),
+		},
+		"auth_id": {
+			Type:         schema.TypeInt,
+			Optional:     true,
+			Description:  "The key id is used to calculate message digest (used when MD5 or SHA authentication is enabled).",
+			ValidateFunc: validation.IntBetween(0, 255),
+		},
+		"auth_key": {
+			Type:      schema.TypeString,
+			Optional:  true,
+			Sensitive: true,
+			Description: "The authentication key to be used, should match on all the neighbors of the network " +
+				"segment.",
+		},
+		KeyComment: PropCommentRw,
 		"cost": {
 			Type:             schema.TypeInt,
 			Optional:         true,
@@ -86,6 +108,14 @@ func ResourceRoutingOspfInterface() *schema.Resource {
 			Computed:         true,
 			Description:      "The interface on which OSPF runs.",
 			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
+		"passive": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
+			Description: "If enabled, then do not send or receive OSPF traffic on this interface. Available in " +
+				"RouterOS starting from version 7.24. <em>The correct value of this attribute may not be displayed " +
+				"in Winbox. Please check the parameters in the console!</em>",
 		},
 		"priority": {
 			Type:             schema.TypeInt,

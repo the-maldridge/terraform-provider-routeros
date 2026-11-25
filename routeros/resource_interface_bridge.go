@@ -334,6 +334,14 @@ func ResourceInterfaceBridge() *schema.Resource {
 			DiffSuppressFunc: TimeEqual,
 			RequiredWith:     []string{"igmp_snooping", "multicast_querier"},
 		},
+		"querier_uses_bridge_address": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Description: "Whether to use the bridge interface source IP address as the source address of the " +
+				"generated queries. This property only has effect when igmp-snooping and multicast-querier is set " +
+				"to yes. Available in RouterOS starting from version 7.24.",
+			RequiredWith: []string{"igmp_snooping", "multicast_querier"},
+		},
 		KeyRunning: PropRunningRo,
 		"ra_guard": {
 			Type:             schema.TypeBool,

@@ -22,6 +22,7 @@ resource "routeros_system_scheduler" "schedule1" {
 ### Optional
 
 - `comment` (String)
+- `days` (Set of String) Weekdays on which the script is executed: `always`, `never` or a comma separated list of days (`sun`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat`). If not set, the days are not considered and the script follows `start_time` plus `interval`. Multi-day intervals are not supported when `days` is set. Available in RouterOS starting from version 7.24.
 - `disabled` (Boolean)
 - `interval` (String) Interval between two script executions, if time interval is set to zero, the script is only executed at its start time, otherwise it is executed repeatedly at the time interval is specified.
 - `policy` (List of String) List of applicable policies:

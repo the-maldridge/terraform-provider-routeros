@@ -13,7 +13,20 @@ func ResourceSystemScheduler() *schema.Resource {
 		MetaResourcePath: PropResourcePath("/system/scheduler"),
 		MetaId:           PropId(Id),
 
-		KeyComment:  PropCommentRw,
+		KeyComment: PropCommentRw,
+		"days": {
+			Type:     schema.TypeSet,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"always", "fri", "mon", "never", "sat", "sun",
+					"thu", "tue", "wed"}, false),
+			},
+			Description: "Weekdays on which the script is executed: `always`, `never` or a comma separated list of " +
+				"days (`sun`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat`). If not set, the days are not considered and " +
+				"the script follows `start_time` plus `interval`. Multi-day intervals are not supported when `days` " +
+				"is set. Available in RouterOS starting from version 7.24.",
+		},
 		KeyDisabled: PropDisabledRw,
 		"interval": {
 			Type:     schema.TypeString,

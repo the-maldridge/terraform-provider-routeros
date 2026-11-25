@@ -24,6 +24,14 @@ func ResourceWifiChannel() *schema.Resource {
 		MetaResourcePath: PropResourcePath("/interface/wifi/channel"),
 		MetaId:           PropId(Id),
 
+		"afc": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Description: "Whether to use AFC (Automated Frequency Coordination) for channel selection. Applies to " +
+				"the 6 GHz band, where AFC is required to determine the usable frequencies. Available in RouterOS " +
+				"starting from version 7.24.",
+			DiffSuppressFunc: AlwaysPresentNotUserProvided,
+		},
 		"band": {
 			Type:        schema.TypeString,
 			Optional:    true,

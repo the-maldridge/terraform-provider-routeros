@@ -40,8 +40,20 @@ func ResourceIpService() *schema.Resource {
 		"address": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Default:     "",
 			Description: "List of IP/IPv6 prefixes from which the service is accessible.",
+			Deprecated:  DeprecatedInfo("7.24"),
+			DiffSuppressFunc: func(k, oldValue, newValue string, d *schema.ResourceData) bool {
+				if oldValue == "" && newValue == "0.0.0.0/0" {
+					return false
+				}
+				return oldValue == newValue
+			},
+		},
+		"available_from": {
+			Type:     schema.TypeString,
+			Optional: true,
+			Description: "List of IP/IPv6 prefixes from which the service is accessible. Available in RouterOS " +
+				"starting from version 7.24, where it replaced `address`.",
 			DiffSuppressFunc: func(k, oldValue, newValue string, d *schema.ResourceData) bool {
 				if oldValue == "" && newValue == "0.0.0.0/0" {
 					return false
